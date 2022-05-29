@@ -20,7 +20,7 @@ public class BasicHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof Protocol) {
-            if(msg == Protocol.GAME_SERVER) {
+            if(msg == Protocol.RAW_SOCKET) {
                 ctx.writeAndFlush(msg);
             } else {
                 flushAndClose(ctx.channel());

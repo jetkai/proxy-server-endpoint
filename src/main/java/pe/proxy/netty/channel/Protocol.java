@@ -8,7 +8,8 @@ package pe.proxy.netty.channel;
  */
 public enum Protocol {
 
-    GAME_SERVER(14),
+    RAW_SOCKET(14),
+    HTTP(-1), //TODO
     UNDEFINED(0);
 
     private final java.lang.Integer id;

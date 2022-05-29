@@ -21,12 +21,12 @@ public class BasicEncoder extends MessageToMessageEncoder<Object> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, List<Object> out) throws Exception {
-        ByteBuf buffer = Unpooled.buffer(100);
-
         int[] values = { 0xFFFFFF, 0x000000, 0xFF00FF, 0x00FF00, 0xFFFF00, 0x00FFFF };
 
-        for(int i = 0; i < values.length; i++) {
-            buffer.writeInt(values[i]);
+        ByteBuf buffer = Unpooled.buffer(values.length * 4);
+
+        for (int value : values) {
+            buffer.writeInt(value);
         }
         out.add(buffer);
 

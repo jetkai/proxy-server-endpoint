@@ -85,8 +85,8 @@ class BasicResponseEntity {
 
     @SuppressWarnings("unused")
     public Map<String, String> getHeaders() {
-        Iterator<String> headers = request.getHeaderNames().asIterator();
         Map<String, String> map = new HashMap<>();
+        Iterator<String> headers = request.getHeaderNames().asIterator();
         while (headers.hasNext()) {
             String headerName = headers.next();
             map.put(headerName, request.getHeader(headerName));
