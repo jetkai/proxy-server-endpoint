@@ -37,9 +37,9 @@ public class BasicEncoder extends MessageToMessageEncoder<Object> {
         if(remoteAddress instanceof InetSocketAddress) {
             InetAddress inetAddress = ((InetSocketAddress) remoteAddress).getAddress();
             if(inetAddress instanceof Inet4Address) {
-                ipAddress = inetAddress.getHostName();
+                ipAddress = inetAddress.getHostAddress();
             } else if(inetAddress instanceof Inet6Address) {
-                ipAddress = inetAddress.getHostName();
+                ipAddress = inetAddress.getHostAddress();
             }
         }
         if(ipAddress != null) {
