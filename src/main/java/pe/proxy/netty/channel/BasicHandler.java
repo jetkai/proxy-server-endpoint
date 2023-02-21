@@ -18,7 +18,7 @@ public class BasicHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         if(msg instanceof Protocol) {
             if(msg == Protocol.RAW_SOCKET) {
                 ctx.writeAndFlush(msg);
@@ -29,7 +29,7 @@ public class BasicHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelInactive(ChannelHandlerContext ctx) {
         flushAndClose(ctx.channel());
     }
 

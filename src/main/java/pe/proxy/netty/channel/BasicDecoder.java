@@ -19,7 +19,7 @@ public class BasicDecoder extends ByteToMessageDecoder {
     private final Logger logger = LoggerFactory.getLogger(BasicDecoder.class);
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) {
        if(buffer.isReadable()) {
            short nextByte = buffer.readUnsignedByte();
 

@@ -1,13 +1,13 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.7'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '3.0.2'
+    id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
     //id 'org.springframework.experimental.aot' version '0.11.5'
 }
 
 group = 'pe.proxy'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '18'
+sourceCompatibility = '19'
 
 repositories {
     maven { url 'https://repo.spring.io/release' }
@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'io.netty', name: 'netty-all', version: '4.1.77.Final'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation group: 'io.netty', name: 'netty-all', version: '4.1.89.Final'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

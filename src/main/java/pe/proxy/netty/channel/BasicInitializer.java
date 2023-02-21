@@ -21,7 +21,7 @@ public class BasicInitializer extends ChannelInitializer<SocketChannel> {
     }
 
     @Override
-    protected void initChannel(SocketChannel ch) throws Exception {
+    protected void initChannel(SocketChannel ch) {
         ch.pipeline()
                 .addLast("decoder", new BasicDecoder())
                 .addLast("encoder", new BasicEncoder())
