@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -22,32 +23,33 @@ public class BasicEncoder extends MessageToMessageEncoder<Object> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Object msg, List<Object> out) {
-        int[] values = { 0xFFFFFF, 0x000000, 0xFF00FF, 0x00FF00, 0xFFFF00, 0x00FFFF };
-
         ByteBuf buffer = Unpooled.buffer(1000); //1KB Buffer
 
+        //Write a few random values, we will confirm these values match on the client's end
+        int[] values = { 0xFFFFFF, 0x000000, 0xFF00FF, 0x00FF00, 0xFFFF00, 0x00FFFF };
         for (int value : values) {
             buffer.writeInt(value);
         }
 
-        //Write Remote Address
-        byte[] ipAddress = null;
+        //Write remote address, we will confirm that the proxy address matches the one sent from the client
+        String ipAddress = null;
         SocketAddress remoteAddress = ctx.channel().remoteAddress();
         if(remoteAddress instanceof InetSocketAddress) {
             InetAddress inetAddress = ((InetSocketAddress) remoteAddress).getAddress();
             if(inetAddress instanceof Inet4Address) {
-                ipAddress = inetAddress.getAddress();
+                ipAddress = inetAddress.getHostName();
             } else if(inetAddress instanceof Inet6Address) {
-                ipAddress = inetAddress.getAddress();
+                ipAddress = inetAddress.getHostName();
             }
         }
         if(ipAddress != null) {
-            buffer.writeBytes(ipAddress);
+            buffer.writeBytes(ipAddress.getBytes(StandardCharsets.UTF_8));
+            buffer.writeByte((byte) 0);
         }
-        buffer.writeByte((byte) 0);
 
         out.add(buffer);
 
         logger.info("Encoding buffer for " + ctx.channel().remoteAddress());
     }
+
 }
